@@ -15,7 +15,7 @@ class Bot(commands.Bot):
 	ROLE_SELECTOR_MSG_ID = 1059592418875420690
 	ROLE_SELECTOR_MSG_CHANNEL_ID = 1059592119897042984
 	ROLES = [
-		Role("🇫🇷","French friess")
+		Role("🇫🇷","French fries")
 	]
 
 	def __init__(self):
