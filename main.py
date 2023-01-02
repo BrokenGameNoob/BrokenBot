@@ -1,18 +1,22 @@
-# bot.py
 import os
-
-import discord
 from dotenv import load_dotenv
 
-load_dotenv("envConf.env")
-TOKEN = os.getenv('DISCORD_TOKEN')
+import discord
+from discord import app_commands
+from discord.ext import commands
 
-client = discord.Client(intents=discord.Intents().all())
+from globalVar import *
 
-@client.event
-async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+from commands import *
+from events import *
+
+def main():    
+	load_dotenv("envConf.env")
+	TOKEN = os.getenv('DISCORD_TOKEN')
+
+	bot.run(TOKEN)
 
 
 
-client.run(TOKEN)
+if __name__ == "__main__":
+	main()
