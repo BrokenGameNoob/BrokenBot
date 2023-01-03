@@ -11,11 +11,12 @@ class Role:
 
 class Bot(commands.Bot):
 
-	ALLOWED_CHANNELS = ["bot-mania"]
+	ALLOWED_CHANNELS = ["bot-mania","🥴mess🥴"]
 	ROLE_SELECTOR_MSG_ID = 1059592418875420690
 	ROLE_SELECTOR_MSG_CHANNEL_ID = 1059592119897042984
 	ROLES = [
-		Role("🇫🇷","French fries")
+		Role("🇫🇷","French fries"),
+		Role("🇬🇧","English")
 	]
 
 	def __init__(self):
@@ -32,5 +33,7 @@ class Bot(commands.Bot):
 		
 		for r in self.ROLES:
 			await msg.add_reaction(r.emojiStr)
+		
+		# print(guild.system_channel)
 
 bot = Bot()

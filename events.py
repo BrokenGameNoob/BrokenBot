@@ -1,6 +1,10 @@
 from globalVar import *
 from utils import *
 
+import discord
+from discord import app_commands
+from discord.ext import commands
+
 import random
 
 @bot.event
@@ -61,3 +65,20 @@ async def on_raw_reaction_remove(payload=None):
 				if member == None:
 					print("Can't find member")
 				await member.remove_roles(role)
+
+
+@bot.event
+async def on_member_join(member : discord.Member):
+	guild = discord.utils.get(bot.guilds)
+	print("Member joined! ",member)
+	if guild.system_channel:
+		roleChannel = bot.get_channel(bot.ROLE_SELECTOR_MSG_CHANNEL_ID)
+		if roleChannel == None:
+			print(f"Role channel not found ! <{bot.ROLE_SELECTOR_MSG_CHANNEL_ID}>")
+			return
+		await guild.system_channel.send(
+			f"Hi {member.mention}! Please select your language here: {roleChannel.mention}\n"+
+			"If you don't do so, you won't get notified when new or announcements are published.\n"+
+			"\n"+
+			f"Salut {member.mention} ! Merci de sélectionner une langue ici : {mention(Bot.ROLE_SELECTOR_MSG_CHANNEL_ID)}\n"+
+			"Cette étape est nécessaire pour être notifié lorsque des informations sont publiées.")

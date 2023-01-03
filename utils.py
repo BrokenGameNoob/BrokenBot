@@ -25,3 +25,11 @@ async def allowedChannel(ctx : discord.channel.TextChannel)->bool:
 		return False
 
 	return True
+
+async def getRole(bot : commands.Bot,roleName : str)->discord.Role:
+	guild = discord.utils.get(bot.guilds)
+	role = discord.utils.get(guild.roles, name=roleName)
+	return role
+
+async def getMessage(channel: discord.TextChannel,id)->discord.Message:
+	return await channel.fetch_message(id)

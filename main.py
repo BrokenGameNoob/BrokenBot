@@ -10,7 +10,7 @@ from globalVar import *
 from commands import *
 from events import *
 
-def main():    
+def main():
 	load_dotenv("envConf.env")
 	TOKEN = os.getenv('DISCORD_TOKEN')
 
