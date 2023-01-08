@@ -20,6 +20,10 @@ function createServiceFile(){
 }
 
 function main(){
+
+    pip3 install discord python-dotenv
+
+    
     if [[ ! -d "${SERVICE_PATH}" ]];then
         echo "Systemd services path <$SERVICE_PATH> not found"
         return

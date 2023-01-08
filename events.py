@@ -80,5 +80,5 @@ async def on_member_join(member : discord.Member):
 			f"Hi {member.mention}! Please select your language here: {roleChannel.mention}\n"+
 			"If you don't do so, you won't get notified when new or announcements are published.\n"+
 			"\n"+
-			f"Salut {member.mention} ! Merci de sélectionner une langue ici : {mention(Bot.ROLE_SELECTOR_MSG_CHANNEL_ID)}\n"+
+			f"Salut {member.mention} ! Merci de sélectionner une langue ici : {roleChannel.mention}\n"+
 			"Cette étape est nécessaire pour être notifié lorsque des informations sont publiées.")

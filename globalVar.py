@@ -2,6 +2,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from TC2 import TCData_t
+
 intents = discord.Intents.all()
 
 class Role:
@@ -37,3 +39,4 @@ class Bot(commands.Bot):
 		# print(guild.system_channel)
 
 bot = Bot()
+tcData = TCData_t()

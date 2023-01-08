@@ -2,6 +2,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+import random
+
 from globalVar import *
 
 def formatAllowedChannel(channelList)->str:
@@ -33,3 +35,19 @@ async def getRole(bot : commands.Bot,roleName : str)->discord.Role:
 
 async def getMessage(channel: discord.TextChannel,id)->discord.Message:
 	return await channel.fetch_message(id)
+
+def getRandom(list,filter : callable):
+	tmpList = []
+	for a in list.values():
+		if filter(a):
+			tmpList.append(a)
+	return random.choice(tmpList)
+
+def formatKeys(d : dict):
+	out = "["
+	for k in d.keys():
+		out += str(k) + ","
+	if len(d.keys()) != 0:
+		out = out[:-1]
+	out += "]"
+	return out
