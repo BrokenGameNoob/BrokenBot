@@ -15,13 +15,13 @@ function createServiceFile(){
         return 1
     fi
 
-    sed "s@{WORKING_DIR}@$PWD@g" "$PWD/$1" > "$target"
+    sudo bash -c "sed 's@{WORKING_DIR}@$PWD@g' '$PWD/$1' > '$target'"
     return $?
 }
 
 function main(){
 
-    pip3 install discord python-dotenv
+    sudo pip3 install discord python-dotenv
 
     
     if [[ ! -d "${SERVICE_PATH}" ]];then
@@ -32,6 +32,8 @@ function main(){
     for f in *.service; do
         echo "Creating -- $f"
         createServiceFile "$f"
+        systemctl enable "$f"
+        systemctl start "$f"
     done
 }
 

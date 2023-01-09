@@ -6,7 +6,8 @@ After=multi-user.target
 Type=simple
 Restart=always
 ExecStart=/usr/bin/python3 main.py
-WorkingDirectory={WORKING_DIR}
+WorkingDirectory=/usr/bin/
+#{WORKING_DIR}
 
 [Install]
 WantedBy=multi-user.target
