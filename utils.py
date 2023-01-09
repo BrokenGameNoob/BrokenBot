@@ -41,13 +41,22 @@ def getRandom(list,filter : callable):
 	for a in list.values():
 		if filter(a):
 			tmpList.append(a)
+	if len(tmpList) == 0:
+		return None
 	return random.choice(tmpList)
 
-def formatKeys(d : dict):
+def formatKeys(d : dict,virtualKeys:list = None):
+	"""
+	@param virtualKeys: keys non existing in the dict to be added to the formatted output
+	"""
+	count = len(d.keys()) + len(virtualKeys)
 	out = "["
 	for k in d.keys():
 		out += str(k) + ","
-	if len(d.keys()) != 0:
+	if virtualKeys != None:
+		for vk in virtualKeys:
+			out += str(vk) + ","
+	if count != 0:
 		out = out[:-1]
 	out += "]"
 	return out

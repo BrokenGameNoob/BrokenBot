@@ -50,6 +50,8 @@ async def chooseRandomRace(ctx,*args):
 	if not await allowedChannel(ctx):
 		return
 	eList = tcData.events()
+	args = list(args)
+	args = [x.upper() for x in args]
 	def filterSr(element):
 		if element.discipline != None:
 			return element.discipline.name.upper() in args
@@ -58,10 +60,15 @@ async def chooseRandomRace(ctx,*args):
 	pMsg = ctx.channel.last_message
 	msg = None
 	if len(args) == 0:
-		msg = await ctx.channel.send(f"Please use one of the following discipline : { formatKeys(tcData.disciplinesNameMap())}\nExample :\n!r SR\nTo get a Street Race race")
+		msg = await ctx.channel.send(f"Please use one of the following discipline : { formatKeys(tcData.disciplinesNameMap(),['ALL'])}\nExample :\n!r SR\n\tTo get a Street Race race\n!r SR HC\n\tTo get a Street Race race or an Hypercar race")
 	else:
+		if "ALL" in args:
+			args = list(tcData.disciplinesNameMap().keys())
 		e = getRandom(eList,filterSr)
-		msg = await ctx.channel.send(f"{e.name}")
+		if e == None:
+			msg = await ctx.channel.send(f"Cannot find any race matching the filter. Please try another category")
+		else:
+			msg = await ctx.channel.send(f"{e.name.title()} [{e.discipline.fullName.title()}]")
 	await __delayDelete([pMsg,msg],60)
 
 @bot.command(name="noshi")

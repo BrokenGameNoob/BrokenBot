@@ -1,5 +1,6 @@
 #coding: utf-8
 
+import html
 import requests as rq
 from enum import Enum
 import random
@@ -48,6 +49,7 @@ class Discipline:
     def __init__(self,jsonDict : dict) -> None:
         self.id = jsonDict["id"]
         self.name = jsonDict["text_id"]
+        self.fullName = jsonDict["text_id"]
         self.family = jsonDict["family"]
         self.img_path = jsonDict["img_path"]
     
@@ -211,7 +213,7 @@ def __mapTexts(jsonElement,texts : dict):
     else:
         isAText = jsonElement in texts.keys()
         if isAText:
-            return texts[jsonElement].replace("#","").replace("&8209;","-")
+            return html.unescape(texts[jsonElement].replace("#",""))
     return jsonElement
 
 
