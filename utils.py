@@ -12,18 +12,22 @@ def formatAllowedChannel(channelList)->str:
 		out = f"{out}***{c}***,"
 	return out[:-1]
 
-async def allowedChannel(ctx : discord.channel.TextChannel)->bool:
-	if type(ctx) is discord.ext.commands.context.Context:
-		ctx = ctx.channel
+async def allowedChannel(msg : discord.Message)->bool:
+	ctx = None
+	if type(msg) is discord.ext.commands.context.Context:
+		ctx = msg.channel
 	
-	if not (type(ctx) is discord.channel.TextChannel):
+	if not (type(msg) is discord.channel.TextChannel):
 		try:
-			ctx = ctx.channel
+			ctx = msg.channel
 		except:
 			return True
 	
-	if ctx.name not in Bot.ALLOWED_CHANNELS:
-		await ctx.send(f"Please use one of the following channel for commands: {formatAllowedChannel(Bot.ALLOWED_CHANNELS)}")
+	if ctx == None:
+		return False
+	
+	if ctx.name not in Bot.ALLOWED_CHANNELS and msg.content[1:] not in globalCommands:
+		await ctx.send(f"{msg.author.mention}, please use one of the following channel for commands: {formatAllowedChannel(Bot.ALLOWED_CHANNELS)}")
 		return False
 
 	return True

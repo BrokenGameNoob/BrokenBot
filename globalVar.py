@@ -31,12 +31,16 @@ class Bot(commands.Bot):
 
 		guild = discord.utils.get(bot.guilds)
 		msg_channel = bot.get_channel(self.ROLE_SELECTOR_MSG_CHANNEL_ID)
-		msg = await msg_channel.fetch_message(self.ROLE_SELECTOR_MSG_ID)
-		
-		for r in self.ROLES:
-			await msg.add_reaction(r.emojiStr)
+		msg = None
+		if msg_channel != None:
+			msg = await msg_channel.fetch_message(self.ROLE_SELECTOR_MSG_ID)
+
+		if msg != None:
+			for r in self.ROLES:
+				await msg.add_reaction(r.emojiStr)
 		
 		# print(guild.system_channel)
 
 bot = Bot()
 tcData = TCData_t()
+globalCommands = ["vote"]
