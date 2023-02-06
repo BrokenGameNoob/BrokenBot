@@ -16,6 +16,14 @@ def main():
 	load_dotenv("envConf.env")
 	TOKEN = os.getenv('DISCORD_TOKEN')
 
+
+	ROLE_SELECTOR_MSG_ID = int(os.getenv('ROLE_SELECTOR_MSG_ID'))
+	if ROLE_SELECTOR_MSG_ID != None:
+		Bot.ROLE_SELECTOR_MSG_ID = ROLE_SELECTOR_MSG_ID
+	ROLE_SELECTOR_MSG_CHANNEL_ID = int(os.getenv('ROLE_SELECTOR_MSG_CHANNEL_ID'))
+	if ROLE_SELECTOR_MSG_CHANNEL_ID != None:
+		Bot.ROLE_SELECTOR_MSG_CHANNEL_ID = ROLE_SELECTOR_MSG_CHANNEL_ID
+
 	# #open text file
 	# text_file = open("tmp.txt", "w")
 
